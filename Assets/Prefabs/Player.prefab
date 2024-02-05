@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 831608821498043998}
   - component: {fileID: 6484541301163572200}
   - component: {fileID: 3159537512795951019}
+  - component: {fileID: 7775617538127730012}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -51,8 +52,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   playerModel: {fileID: 8520253302668769867}
-  camera: {fileID: 1709318208192729256}
-  viewPortLocation: {fileID: 4239340030437036029}
 --- !u!114 &831608821498043998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,6 +108,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b6585356-654d-49ea-80a6-4a86e9ba7a6e
     m_ActionName: Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8acb2efb-8a12-4af3-a896-d1dbfd790743
+    m_ActionName: Player/Click[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -141,6 +144,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 68
   m_CollisionDetection: 0
+--- !u!136 &7775617538127730012
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271272992773567211}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.104851454
+  m_Height: 0.468114
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.047491178, z: 0.007549703}
 --- !u!1 &878981720847487257
 GameObject:
   m_ObjectHideFlags: 0
