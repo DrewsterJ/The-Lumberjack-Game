@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     // Public fields
     public float moveSpeed;
     public GameObject viewPort;
-    public GameObject playerModel;
+    public GameObject playerHead;
     
     // Private fields
     private Rigidbody _rb;
@@ -26,9 +26,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //HandlePlayerMovement();
-        //HandlePlayerLeftRightRotation();
-        //HandleUpDownRotation();
         HandleMouseLookAround();
         HandlePlayerMovement();
     }
@@ -41,42 +38,22 @@ public class PlayerMovement : MonoBehaviour
     // https://www.youtube.com/watch?v=W70n_bXp7Dc
     private void HandleMouseLookAround()
     {
-        rotationY += Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity.x;
-        rotationX += Input.GetAxis("Mouse Y") * Time.deltaTime * -1 * sensitivity.y;
-        rotationX = Mathf.Clamp(rotationX, -90f, 90f);
-        viewPort.transform.localEulerAngles = new Vector3(rotationX, rotationY, 0);
+        rotationY += Input.GetAxis("Mouse X") * (Time.deltaTime * 1.5f) * sensitivity.x;
+        rotationX += Input.GetAxis("Mouse Y") * (Time.deltaTime * 1.5f) * -1 * sensitivity.y;
+        rotationX = Mathf.Clamp(rotationX, -90f, 85f);
+        
+        viewPort.transform.localEulerAngles = new Vector3(rotationX, transform.rotation.y, 0);
+        playerHead.transform.localEulerAngles = new Vector3(rotationX, transform.rotation.y, 0);
+        transform.localEulerAngles = new Vector3(transform.rotation.x, rotationY, 0);
     }
 
     // Handles player movement backward, forward, left, and right
     private void HandlePlayerMovement()
     {
-        var forwardDirection = viewPort.transform.forward;
+        var forwardDirection = transform.forward;
         var inputDirection = _moveInput.normalized;
-        var moveDirection = (forwardDirection * inputDirection.z + viewPort.transform.right * inputDirection.x);
+        var moveDirection = (forwardDirection * inputDirection.z + transform.right * inputDirection.x);
         _rb.velocity = moveDirection * moveSpeed;
-    }
-
-    // Handles player 360 degree rotation left and right
-    private void HandlePlayerLeftRightRotation()
-    {
-        var mouseDelta = Mouse.current.delta.ReadValue();
-        var mouseXDifference = Math.Abs(mouseDelta.x - _prevMouseDelta.x);
-        
-        if (!(mouseXDifference > 0)) 
-            return;
-        
-        var rotationAmount = mouseXDifference switch
-        {
-            > 0 and <= 1 => (mouseDelta.x < _prevMouseDelta.x) ? -2.0f : 2.0f,
-            > 1 and <= 3 => (mouseDelta.x < _prevMouseDelta.x) ? -3.0f : 3.0f,
-            > 3 and <= 5 => (mouseDelta.x < _prevMouseDelta.x) ? -4.0f : 4.0f,
-            _ => (mouseDelta.x < _prevMouseDelta.x) ? -6.0f : 6.0f
-        };
-
-        //rotationAmount *= Time.deltaTime;
-        
-        var rotation = playerModel.transform.rotation;
-        playerModel.transform.Rotate(rotation.x, rotation.y + rotationAmount, rotation.z);
     }
 
     // Handles player up down head rotation
@@ -85,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
         var rotation = viewPort.transform.rotation;
         viewPort.transform.Rotate(0, rotation.y + 10, 0);
     }
-
+    
     public void OnMoveInput(InputAction.CallbackContext ctx)
     {
         _moveInput = ctx.ReadValue<Vector3>();

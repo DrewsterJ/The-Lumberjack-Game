@@ -51,7 +51,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  playerModel: {fileID: 8520253302668769867}
+  viewPort: {fileID: 5461324939976917567}
+  playerHead: {fileID: 7883742579456106583}
+  sensitivity: {x: 360, y: 360}
 --- !u!114 &831608821498043998
 MonoBehaviour:
   m_ObjectHideFlags: 0
