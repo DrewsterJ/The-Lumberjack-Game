@@ -2982,11 +2982,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 836b26ab26cecf4449617b0ba2c4f230, type: 3}
---- !u!1 &2085334857 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 271272992773567211, guid: dcc811f802338e74c93d4f4bf178e337, type: 3}
-  m_PrefabInstance: {fileID: 431719611856288753}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2112694350 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3903534701280196393, guid: 836b26ab26cecf4449617b0ba2c4f230, type: 3}
@@ -3003,30 +2998,6 @@ PrefabInstance:
     - target: {fileID: 271272992773567211, guid: dcc811f802338e74c93d4f4bf178e337, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6484541301163572200, guid: dcc811f802338e74c93d4f4bf178e337, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 431719611856288762}
-    - target: {fileID: 6484541301163572200, guid: dcc811f802338e74c93d4f4bf178e337, type: 3}
-      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 431719611856288762}
-    - target: {fileID: 6484541301163572200, guid: dcc811f802338e74c93d4f4bf178e337, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnMoveInput
-      objectReference: {fileID: 0}
-    - target: {fileID: 6484541301163572200, guid: dcc811f802338e74c93d4f4bf178e337, type: 3}
-      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnClick
-      objectReference: {fileID: 0}
-    - target: {fileID: 6484541301163572200, guid: dcc811f802338e74c93d4f4bf178e337, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PlayerController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 6484541301163572200, guid: dcc811f802338e74c93d4f4bf178e337, type: 3}
-      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PlayerController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7516354307773634144, guid: dcc811f802338e74c93d4f4bf178e337, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3071,35 +3042,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 271272992773567211, guid: dcc811f802338e74c93d4f4bf178e337, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 431719611856288763}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dcc811f802338e74c93d4f4bf178e337, type: 3}
---- !u!114 &431719611856288762 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3849015665957916767, guid: dcc811f802338e74c93d4f4bf178e337, type: 3}
-  m_PrefabInstance: {fileID: 431719611856288753}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2085334857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3226440cb92ea0e40a8873512309aafa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &431719611856288763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2085334857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94fc857c564f3a8419e3c85cbe677618, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activeItem: {fileID: 100000, guid: b92e432993e63b740a483cc7a150f000, type: 3}
 --- !u!1001 &6077728061029807651
 PrefabInstance:
   m_ObjectHideFlags: 0
