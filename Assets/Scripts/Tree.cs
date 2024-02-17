@@ -34,6 +34,14 @@ public class Tree : MonoBehaviour
         if (_lumber == 0)
             Kill();
     }
+    
+    /*
+     * CutTreeDown()
+     * 1. Tree falls (as an animation?)
+     * 2. Drop 2 - 3 packs of logs
+     * 3. Emit a small smoke particle effect
+     * 4. After a small amount of time, make the tree disappear
+     */
 
     private void Kill()
     {
