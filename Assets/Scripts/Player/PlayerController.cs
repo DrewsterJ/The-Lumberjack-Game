@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -64,14 +65,20 @@ public class PlayerController : MonoBehaviour
     {
         if (ctx.started)
         {
-            GetComponent<EquippedItemController>().PerformLeftClickAnimation();
+            bool animStarted = GetComponent<EquippedItemController>().PerformLeftClickAnimation();
+            if (!animStarted)
+                return;
+            
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out var hit, 0.17f))
             {
-                var tree = hit.collider.GetComponent<Tree>();
-                var extractedLumber = tree.ExtractLumber(2);
-                var playerInventory = GetComponent<PlayerInventory>();
-                playerInventory.AddLumber(extractedLumber);
-                tree.KillTreeIfHasNoLumber();
+                if (hit.collider.CompareTag("Tree"))
+                {
+                    var tree = hit.collider.GetComponent<Tree>();
+                    var extractedLumber = tree.ExtractLumber(2);
+                    var playerInventory = GetComponent<PlayerInventory>();
+                    playerInventory.AddLumber(extractedLumber);
+                    tree.KillTreeIfHasNoLumber();
+                }
             }
         }
         else if (ctx.performed)

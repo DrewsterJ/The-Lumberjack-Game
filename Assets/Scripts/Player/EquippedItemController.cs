@@ -16,13 +16,15 @@ public class EquippedItemController : MonoBehaviour
         Debug.Assert(!activeItem.IsUnityNull());
     }
 
-    public void PerformLeftClickAnimation()
+    // Returns whether the animation successfully started
+    public bool PerformLeftClickAnimation()
     {
         if (Math.Abs(lastActionStartTime - Time.time) < 0.5f)
-            return;
+            return false;
 
         lastActionStartTime = Time.time;
         
         activeItemClickAnim.SetTrigger(Clicked);
+        return true;
     }
 }
