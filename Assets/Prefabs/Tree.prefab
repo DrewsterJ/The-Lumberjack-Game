@@ -258,7 +258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38c917166a092c84cbe1b69e94034b3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lumber: 0
+  minLumberAmount: 5
+  maxLumberAmount: 20
 --- !u!65 &3262125569358013495
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -278,8 +279,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.2062687, y: 1.0185956, z: 0.20380183}
-  m_Center: {x: -0.0001346916, y: 0.47099242, z: -0.00061320513}
+  m_Size: {x: 0.22433361, y: 1.0185956, z: 0.22911175}
+  m_Center: {x: 0.0012935847, y: 0.4709924, z: 0.004571311}
 --- !u!1 &4972678409419516164
 GameObject:
   m_ObjectHideFlags: 0

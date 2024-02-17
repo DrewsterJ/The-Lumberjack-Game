@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 7775617538127730012}
   - component: {fileID: 3849015665957916767}
   - component: {fileID: 188014558763396545}
+  - component: {fileID: 2283734877875072839}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -196,6 +197,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeItem: {fileID: 1874745364630090016}
   activeItemClickAnim: {fileID: 1874745364637500128}
+--- !u!114 &2283734877875072839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271272992773567211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc877ce1ee2e1842b9de6150cf8312f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lumber: 0
 --- !u!1 &878981720847487257
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,18 +1345,6 @@ PrefabInstance:
       value: axe
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b92e432993e63b740a483cc7a150f000, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.56768155
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: b92e432993e63b740a483cc7a150f000, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.603925
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: b92e432993e63b740a483cc7a150f000, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.53849185
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: b92e432993e63b740a483cc7a150f000, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.022127785
       objectReference: {fileID: 0}
@@ -1382,10 +1384,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 167.283
       objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: b92e432993e63b740a483cc7a150f000, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 6e36f8775786ad940a61d84fd031a27d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

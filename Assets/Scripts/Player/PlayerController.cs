@@ -64,20 +64,19 @@ public class PlayerController : MonoBehaviour
     {
         if (ctx.started)
         {
-            // Action started
             GetComponent<EquippedItemController>().PerformLeftClickAnimation();
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
-            { }
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out var hit, 0.17f))
+            {
+                var tree = hit.collider.GetComponent<Tree>();
+                var extractedLumber = tree.ExtractLumber(2);
+                var playerInventory = GetComponent<PlayerInventory>();
+                playerInventory.AddLumber(extractedLumber);
+                tree.KillTreeIfHasNoLumber();
+            }
         }
         else if (ctx.performed)
-        {
-            // Action was performed
-        }
+        { }
         else if (ctx.canceled)
-        {
-            // Action was cancelled
-        }
-        
+        { }
     }
 }
