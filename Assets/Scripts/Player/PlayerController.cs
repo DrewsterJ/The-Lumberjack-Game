@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         Debug.Assert(!_rb.IsUnityNull());
         Debug.Assert(moveSpeed > 0);
     }
-
+    
     private void Update()
     {
         // Recommend keeping a way to keep track of all interactable objects in a container, and checking if the player is within range of any
@@ -138,12 +138,9 @@ public class PlayerController : MonoBehaviour
     {
         if (!_holdingItem || _itemPlayerIsHolding.IsUnityNull())
             return;
-
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward), Color.red, 10f);
-        //var dropPosition = transform.TransformDirection(Vector3.forward);
-        //dropPosition.y = 0.0f;
+        
         var dropPosition = transform.position + transform.forward * 0.30f;
-        dropPosition.y = 0.0f;
+        //dropPosition.y = 0.2f;
         
         var droppedItem = Instantiate(_itemPlayerIsHolding, dropPosition, _itemPlayerIsHolding.transform.rotation);
         
@@ -159,10 +156,18 @@ public class PlayerController : MonoBehaviour
         foreach (var elem in childrenColliders)
             elem.excludeLayers = noLayerMask;
         
+        var droppedItemRb = droppedItem.GetComponent<Rigidbody>();
+        droppedItemRb.isKinematic = false;
+        droppedItemRb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ |
+                                    RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY |
+                                    RigidbodyConstraints.FreezeRotationZ;
+        
         Destroy(_itemPlayerIsHolding);
 
         _holdingItem = false;
+        GetComponent<EquippedItemController>().activeItem.SetActive(true);
         _itemPlayerIsHolding = null;
+        GetComponent<PlayerInventory>().ExtractAllLumber();
     }
 
     private void PickupInteractiveObject(Collider itemToPickup)
@@ -184,9 +189,15 @@ public class PlayerController : MonoBehaviour
         var childrenColliders = newObject.GetComponentsInChildren<MeshCollider>();
         foreach (var elem in childrenColliders)
             elem.excludeLayers = allLayerMask;
+
+        var objRb = newObject.GetComponent<Rigidbody>();
+        objRb.isKinematic = true;
+        objRb.constraints = RigidbodyConstraints.None;
         
+        GetComponent<EquippedItemController>().activeItem.SetActive(false);
         _holdingItem = true;
         _itemPlayerIsHolding = newObject;
+        GetComponent<PlayerInventory>().AddLumber(3);
         
         Destroy(itemToPickup.gameObject);
     }
@@ -195,6 +206,9 @@ public class PlayerController : MonoBehaviour
     {
         if (ctx.started)
         {
+            if (_holdingItem)
+                return;
+            
             bool animStarted = GetComponent<EquippedItemController>().PerformLeftClickAnimation();
             if (!animStarted)
                 return;

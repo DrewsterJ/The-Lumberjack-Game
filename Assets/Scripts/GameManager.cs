@@ -3,8 +3,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
-    public int collectedLumber;
     
     void Start()
     {
@@ -18,10 +16,5 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         else
             instance = this;
-    }
-
-    public void AddLumber(int amt)
-    {
-        collectedLumber += amt;
     }
 }
