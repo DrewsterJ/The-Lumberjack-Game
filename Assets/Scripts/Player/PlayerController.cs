@@ -1,6 +1,8 @@
 using System;
+using System.Net.NetworkInformation;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,7 +22,8 @@ public class PlayerController : MonoBehaviour
     // External fields
     public GameObject actionTextGameObject;
     public GameObject playerItemHoldPosition;
-    private Collider colliderPlayerIsLookingAt = null;
+    private Collider _colliderPlayerIsLookingAt = null;
+    private GameObject _itemPlayerIsHolding;
 
     void Start()
     {
@@ -37,19 +40,33 @@ public class PlayerController : MonoBehaviour
     {
         // Recommend keeping a way to keep track of all interactable objects in a container, and checking if the player is within range of any
         // of them. If the player is within 1.0f of any interactable object, we run the raycast. Otherwise, we don't keep checking in this update loop.
-        var layerMask = LayerMask.GetMask("InteractableObject");
+        var layerMask = LayerMask.NameToLayer("InteractableObject");
+        var ignoreLayerMask = LayerMask.GetMask("Player");
         if (Physics.Raycast(playerHead.transform.position, playerHead.transform.TransformDirection(Vector3.forward),
-                out var hit, 0.45f, layerMask))
+                out var hit, 0.45f, ~ignoreLayerMask))
         {
-            if (hit.collider.CompareTag("LogBundle") && !_holdingItem)
+            if ((hit.collider.gameObject.layer & layerMask) == layerMask)
             {
-                actionTextGameObject.SetActive(true);
-                colliderPlayerIsLookingAt = hit.collider;
+                if (hit.collider.CompareTag("LogBundle") && !_holdingItem)
+                {
+                    actionTextGameObject.SetActive(true);
+                    _colliderPlayerIsLookingAt = hit.collider;
+                }
+                else
+                {
+                    _colliderPlayerIsLookingAt = null;
+                    actionTextGameObject.SetActive(false);
+                }
+            }
+            else
+            {
+                _colliderPlayerIsLookingAt = null;
+                actionTextGameObject.SetActive(false);
             }
         }
         else
         {
-            colliderPlayerIsLookingAt = null;
+            _colliderPlayerIsLookingAt = null;
             actionTextGameObject.SetActive(false);
         }
     }
@@ -100,8 +117,15 @@ public class PlayerController : MonoBehaviour
         {
             if (key == "E")
             {
-                if (actionTextGameObject.activeSelf)
-                    PickupInteractiveObject(colliderPlayerIsLookingAt);
+                if (_holdingItem)
+                {
+                    DropItemPlayerIsHolding();
+                }
+                else
+                {
+                    if (actionTextGameObject.activeSelf)
+                        PickupInteractiveObject(_colliderPlayerIsLookingAt);
+                }
             }
         }
         else if (ctx.performed)
@@ -110,30 +134,59 @@ public class PlayerController : MonoBehaviour
         { }
     }
 
+    private void DropItemPlayerIsHolding()
+    {
+        if (!_holdingItem || _itemPlayerIsHolding.IsUnityNull())
+            return;
+
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward), Color.red, 10f);
+        //var dropPosition = transform.TransformDirection(Vector3.forward);
+        //dropPosition.y = 0.0f;
+        var dropPosition = transform.position + transform.forward * 0.30f;
+        dropPosition.y = 0.0f;
+        
+        var droppedItem = Instantiate(_itemPlayerIsHolding, dropPosition, _itemPlayerIsHolding.transform.rotation);
+        
+        // https://forum.unity.com/threads/set-layermask-to-everything-via-code-c.468180/
+        var noLayerMask = LayerMask.GetMask("Nothing");
+        
+        // Enable colliders of object that was dropped
+        var colliders = droppedItem.GetComponents<BoxCollider>();
+        foreach (var elem in colliders)
+            elem.excludeLayers = noLayerMask;
+
+        var childrenColliders = droppedItem.GetComponentsInChildren<MeshCollider>();
+        foreach (var elem in childrenColliders)
+            elem.excludeLayers = noLayerMask;
+        
+        Destroy(_itemPlayerIsHolding);
+
+        _holdingItem = false;
+        _itemPlayerIsHolding = null;
+    }
+
     private void PickupInteractiveObject(Collider itemToPickup)
     {
         if (itemToPickup.IsUnityNull() || itemToPickup.IsDestroyed() || _holdingItem)
             return;
         
-        //itemToPickup.transform.position = playerItemHoldPosition.transform.position;
-        //itemToPickup.transform.rotation = playerItemHoldPosition.transform.rotation;
-        var prevPos = playerItemHoldPosition.transform.position;
-        var prevRot = playerItemHoldPosition.transform.rotation;
-
-        var newObject = Instantiate(itemToPickup.gameObject, prevPos, prevRot, playerItemHoldPosition.transform);
+        var newObject = Instantiate(itemToPickup.gameObject, playerItemHoldPosition.transform.position, 
+            playerItemHoldPosition.transform.rotation, playerItemHoldPosition.transform);
+        
+        // https://forum.unity.com/threads/set-layermask-to-everything-via-code-c.468180/
+        var allLayerMask = ~0;
         
         // Disable colliders of object being held
         var colliders = newObject.GetComponents<BoxCollider>();
         foreach (var elem in colliders)
-            Destroy(elem);
+            elem.excludeLayers = allLayerMask;
 
         var childrenColliders = newObject.GetComponentsInChildren<MeshCollider>();
         foreach (var elem in childrenColliders)
-            Destroy(elem);
+            elem.excludeLayers = allLayerMask;
         
         _holdingItem = true;
-        //playerItemHoldPosition.transform.position = prevPos;
-        //playerItemHoldPosition.transform.rotation = prevRot;
+        _itemPlayerIsHolding = newObject;
         
         Destroy(itemToPickup.gameObject);
     }

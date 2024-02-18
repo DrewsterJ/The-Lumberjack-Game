@@ -309,10 +309,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LogBundle
       objectReference: {fileID: 0}
-    - target: {fileID: 3072663180330156995, guid: f97aa02f437215747aca29c55f0db125, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -523,25 +519,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5916451894647611772, guid: 0ca3a0b32eab47c448db3e635baaddd9, type: 3}
   m_PrefabInstance: {fileID: 1283899432}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &958933991 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6834806682302774020, guid: 0ca3a0b32eab47c448db3e635baaddd9, type: 3}
-  m_PrefabInstance: {fileID: 1283899432}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &958933996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 958933991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38c917166a092c84cbe1b69e94034b3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minLumberAmount: 5
-  maxLumberAmount: 20
 --- !u!1 &1084473153
 GameObject:
   m_ObjectHideFlags: 0
@@ -923,10 +900,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6834806682302774020, guid: 0ca3a0b32eab47c448db3e635baaddd9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 958933996}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ca3a0b32eab47c448db3e635baaddd9, type: 3}
 --- !u!1 &1299998254
 GameObject:

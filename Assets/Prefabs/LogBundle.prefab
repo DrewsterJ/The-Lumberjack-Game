@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 245281462699772729}
   - component: {fileID: 5775824763432247864}
   - component: {fileID: 1045712719555510222}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LogBundle
   m_TagString: LogBundle
   m_Icon: {fileID: 0}
@@ -55,8 +55,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.19930597, y: 0.065425724, z: 0.13141704}
-  m_Center: {x: -0.022852935, y: 0.029379345, z: -0.032311536}
+  m_Size: {x: 0.19930597, y: 0.066822186, z: 0.13348705}
+  m_Center: {x: -0.022852935, y: 0.030077577, z: -0.03212422}
 --- !u!65 &1045712719555510222
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -76,8 +76,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.1937821, y: 0.048276983, z: 0.064304724}
-  m_Center: {x: -0.020090982, y: 0.08631514, z: -0.031037435}
+  m_Size: {x: 0.1937821, y: 0.049559295, z: 0.06922086}
+  m_Center: {x: -0.020090982, y: 0.08741313, z: -0.031696502}
 --- !u!1001 &2818510382185570287
 PrefabInstance:
   m_ObjectHideFlags: 0
