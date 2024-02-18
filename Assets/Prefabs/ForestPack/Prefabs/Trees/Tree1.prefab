@@ -148,5 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38c917166a092c84cbe1b69e94034b3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minLumberAmount: 5
-  maxLumberAmount: 20
+  _health: 20
+  _lumber: 0
+  logBundlePrefab: {fileID: 3072663180330156995, guid: f97aa02f437215747aca29c55f0db125, type: 3}

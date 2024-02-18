@@ -174,8 +174,11 @@ public class PlayerController : MonoBehaviour
     {
         if (itemToPickup.IsUnityNull() || itemToPickup.IsDestroyed() || _holdingItem)
             return;
+
+        var newPosition = playerItemHoldPosition.transform.position;
+        newPosition.y += .027f;
         
-        var newObject = Instantiate(itemToPickup.gameObject, playerItemHoldPosition.transform.position, 
+        var newObject = Instantiate(itemToPickup.gameObject, newPosition, 
             playerItemHoldPosition.transform.rotation, playerItemHoldPosition.transform);
         
         // https://forum.unity.com/threads/set-layermask-to-everything-via-code-c.468180/
@@ -218,10 +221,8 @@ public class PlayerController : MonoBehaviour
                 if (hit.collider.CompareTag("Tree"))
                 {
                     var tree = hit.collider.GetComponent<Tree>();
-                    var extractedLumber = tree.ExtractLumber(2);
-                    var playerInventory = GetComponent<PlayerInventory>();
-                    playerInventory.AddLumber(extractedLumber);
-                    tree.KillTreeIfHasNoLumber();
+                    //var extractedLumber = tree.ExtractLumber(2);
+                    tree.DamageTree(2);
                 }
             }
         }
