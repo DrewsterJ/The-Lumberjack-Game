@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 3328443682857235479}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.48, z: -0.475}
-  m_LocalScale: {x: 1, y: 1, z: 0.05}
+  m_LocalPosition: {x: 0.0000000041469, y: 0.5129, z: -0.475}
+  m_LocalScale: {x: 1.305, y: 1.1123713, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6171304193019291893}
@@ -179,8 +179,8 @@ Transform:
   m_GameObject: {fileID: 7902636840015581116}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.05, z: 1}
+  m_LocalPosition: {x: 0.0000000027054, y: 0, z: -0}
+  m_LocalScale: {x: 1.305, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6171304193019291893}
@@ -265,6 +265,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6171304193019291893}
+  - component: {fileID: 4302577515658314447}
   m_Layer: 0
   m_Name: LumberDepositZone
   m_TagString: Untagged
@@ -282,7 +283,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.29201055, y: 0.29201055, z: 0.29201055}
+  m_LocalScale: {x: 1.5675653, y: 1.5675653, z: 1.5675653}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5457637125018514214}
@@ -291,6 +292,18 @@ Transform:
   - {fileID: 6162023483157826299}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4302577515658314447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8636029239216223304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f51ed9851bd78ec4398f3018aa70ace8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8910614276808544992
 GameObject:
   m_ObjectHideFlags: 0

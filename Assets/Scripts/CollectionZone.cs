@@ -8,6 +8,7 @@ public class CollectionZone : MonoBehaviour
 {
     public List<GameObject> logPlacementPositions;
     private int _curLogPlacementPosition = 0;
+    public int numLogsAvailable;
 
     private void Start()
     {
@@ -26,16 +27,13 @@ public class CollectionZone : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
-    
-    private void OnCollisionEnter(Collision other)
-    {
-    }
 
     private void AddLogsToCollection(int amount)
     {
         if (_curLogPlacementPosition + amount > logPlacementPositions.Count)
             amount = logPlacementPositions.Count - _curLogPlacementPosition;
 
+        numLogsAvailable += amount;
         var lastActiveLogPosition = _curLogPlacementPosition;
         for (var i = _curLogPlacementPosition; i < _curLogPlacementPosition + amount; ++i)
         {
@@ -46,5 +44,16 @@ public class CollectionZone : MonoBehaviour
         }
 
         _curLogPlacementPosition = lastActiveLogPosition;
+    }
+
+    public int RemoveAvailableLogs()
+    {
+        foreach (var log in logPlacementPositions)
+            log.SetActive(false);
+        
+        var availableLogs = numLogsAvailable;
+        _curLogPlacementPosition = 0;
+        numLogsAvailable = 0;
+        return availableLogs;
     }
 }

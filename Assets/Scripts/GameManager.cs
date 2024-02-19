@@ -17,4 +17,14 @@ public class GameManager : MonoBehaviour
         else
             instance = this;
     }
+
+    // https://discussions.unity.com/t/detecting-when-applicationdidbecomeactive-in-unity/47093
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        if (hasFocus)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+    }
 }

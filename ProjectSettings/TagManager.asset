@@ -8,6 +8,8 @@ TagManager:
   - Tree
   - LogBundle
   - WorldButton
+  - LogConversionBlock
+  - PlankConversionBlock
   layers:
   - Default
   - TransparentFX

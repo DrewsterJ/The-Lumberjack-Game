@@ -146,23 +146,30 @@ public class PlayerController : MonoBehaviour
         {
             if (key == "E")
             {
-                if (_colliderPlayerIsLookingAt.CompareTag("LogBundle"))
+                if (_holdingItem)
                 {
-                    if (_holdingItem)
-                    {
-                        DropItemPlayerIsHolding();
-                    }
-                    else
-                    {
-                        if (actionTextGameObject.activeSelf)
-                            PickupInteractiveObject(_colliderPlayerIsLookingAt);
-                    }
+                    DropItemPlayerIsHolding();
                 }
-                else if (_colliderPlayerIsLookingAt.CompareTag("WorldButton"))
+                else if (_colliderPlayerIsLookingAt != null && !_colliderPlayerIsLookingAt.IsDestroyed())
                 {
-                    var logProcessingBuilding =
-                        _colliderPlayerIsLookingAt.gameObject.GetComponentInParent<LumberProcessingFacility>();
-                    logProcessingBuilding.DepositLogs();
+                    if (_colliderPlayerIsLookingAt.CompareTag("LogBundle"))
+                    {
+                        if (_holdingItem)
+                        {
+                            DropItemPlayerIsHolding();
+                        }
+                        else
+                        {
+                            if (actionTextGameObject.activeSelf)
+                                PickupInteractiveObject(_colliderPlayerIsLookingAt);
+                        }
+                    }
+                    else if (_colliderPlayerIsLookingAt.CompareTag("WorldButton"))
+                    {
+                        var logProcessingBuilding =
+                            _colliderPlayerIsLookingAt.gameObject.GetComponentInParent<LumberProcessingFacility>();
+                        logProcessingBuilding.DepositLogs();
+                    }
                 }
             }
         }
