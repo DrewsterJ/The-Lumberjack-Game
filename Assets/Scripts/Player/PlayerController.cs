@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -22,8 +23,14 @@ public class PlayerController : MonoBehaviour
     // External fields
     public GameObject actionTextGameObject;
     public GameObject playerItemHoldPosition;
-    private Collider _colliderPlayerIsLookingAt = null;
+    private Collider _colliderPlayerIsLookingAt;
     private GameObject _itemPlayerIsHolding;
+    //public GameObject mouseCursor;
+    public GameObject mouseCursorObject;
+    public Vector3 defaultCursorSize = new Vector3(0.1f, 0.1f, 0.1f);
+    public Sprite defaultCursorSprite;
+    public Vector3 handCursorSize = new Vector3(0.3373f, 0.3373f, 0.3373f);
+    public Sprite handCursorSprite;
 
     void Start()
     {
@@ -49,23 +56,45 @@ public class PlayerController : MonoBehaviour
             {
                 if (hit.collider.CompareTag("LogBundle") && !_holdingItem)
                 {
+                    var mouseCursor = mouseCursorObject.GetComponent<Image>();
+                    mouseCursor.sprite = handCursorSprite;
+                    mouseCursorObject.transform.localScale = handCursorSize;
                     actionTextGameObject.SetActive(true);
+                    actionTextGameObject.GetComponent<TMP_Text>().text = "Press E to equip";
+                    _colliderPlayerIsLookingAt = hit.collider;
+                }
+                else if (hit.collider.CompareTag("WorldButton"))
+                {
+                    var mouseCursor = mouseCursorObject.GetComponent<Image>();
+                    mouseCursor.sprite = handCursorSprite;
+                    mouseCursorObject.transform.localScale = handCursorSize;
+                    actionTextGameObject.SetActive(true);
+                    actionTextGameObject.GetComponent<TMP_Text>().text = "Press E to interact";
                     _colliderPlayerIsLookingAt = hit.collider;
                 }
                 else
                 {
+                    var mouseCursor = mouseCursorObject.GetComponent<Image>();
+                    mouseCursor.sprite = defaultCursorSprite;
+                    mouseCursorObject.transform.localScale = defaultCursorSize;
                     _colliderPlayerIsLookingAt = null;
                     actionTextGameObject.SetActive(false);
                 }
             }
             else
             {
+                var mouseCursor = mouseCursorObject.GetComponent<Image>();
+                mouseCursor.sprite = defaultCursorSprite;
+                mouseCursorObject.transform.localScale = defaultCursorSize;
                 _colliderPlayerIsLookingAt = null;
                 actionTextGameObject.SetActive(false);
             }
         }
         else
         {
+            var mouseCursor = mouseCursorObject.GetComponent<Image>();
+            mouseCursor.sprite = defaultCursorSprite;
+            mouseCursorObject.transform.localScale = defaultCursorSize;
             _colliderPlayerIsLookingAt = null;
             actionTextGameObject.SetActive(false);
         }
@@ -117,14 +146,23 @@ public class PlayerController : MonoBehaviour
         {
             if (key == "E")
             {
-                if (_holdingItem)
+                if (_colliderPlayerIsLookingAt.CompareTag("LogBundle"))
                 {
-                    DropItemPlayerIsHolding();
+                    if (_holdingItem)
+                    {
+                        DropItemPlayerIsHolding();
+                    }
+                    else
+                    {
+                        if (actionTextGameObject.activeSelf)
+                            PickupInteractiveObject(_colliderPlayerIsLookingAt);
+                    }
                 }
-                else
+                else if (_colliderPlayerIsLookingAt.CompareTag("WorldButton"))
                 {
-                    if (actionTextGameObject.activeSelf)
-                        PickupInteractiveObject(_colliderPlayerIsLookingAt);
+                    var logProcessingBuilding =
+                        _colliderPlayerIsLookingAt.gameObject.GetComponentInParent<LumberProcessingFacility>();
+                    logProcessingBuilding.DepositLogs();
                 }
             }
         }
@@ -167,7 +205,6 @@ public class PlayerController : MonoBehaviour
         _holdingItem = false;
         GetComponent<EquippedItemController>().activeItem.SetActive(true);
         _itemPlayerIsHolding = null;
-        GetComponent<PlayerInventory>().ExtractAllLumber();
     }
 
     private void PickupInteractiveObject(Collider itemToPickup)
@@ -200,7 +237,6 @@ public class PlayerController : MonoBehaviour
         GetComponent<EquippedItemController>().activeItem.SetActive(false);
         _holdingItem = true;
         _itemPlayerIsHolding = newObject;
-        GetComponent<PlayerInventory>().AddLumber(3);
         
         Destroy(itemToPickup.gameObject);
     }

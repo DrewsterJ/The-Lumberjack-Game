@@ -8,17 +8,12 @@ public class CollectionZone : MonoBehaviour
 {
     public List<GameObject> logPlacementPositions;
     private int _curLogPlacementPosition = 0;
-    
-    
 
     private void Start()
     {
         foreach (var log in logPlacementPositions)
         {
             log.SetActive(false);
-            //var meshCollider = log.GetComponent<MeshCollider>();
-            //Destroy(meshCollider);
-            //meshCollider.excludeLayers = LayerMask.GetMask("Nothing");
         }
     }
     
